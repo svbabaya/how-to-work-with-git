@@ -87,9 +87,11 @@ $ git commit -m "... #334..."
 ```mermaid
 graph TD;
       A[untracked] -- add --> B[staged];
-      B[staged] -- commit --> C[tracked];
+      B[tracked + staged] -- commit --> C[tracked];
       C[tracked] -- changes --> D[tracked + modified];
-      D[tracked + modified] -- add --> B[staged];
+      D[tracked + modified] -- add --> B[tracked + staged];
+      B[tracked + staged] -- changes --> E[tracked + staged + modified]
+      E[tracked + staged + modified] -- add --> B[tracked + staged]
 ```
 
-4.3 Описание состояний:
+4.3 Состояние **untracked** появляется у всех файлов папки проекта сразу после создания репозитория командой **git init**. А после первого добавления файла в **staging area** командой **git add .**, файл переходит в состояние **tracked** и остается в нем на всех последующих этапах сохранения состояния проекта. При этом к состоянию **tracked** в зависимости от ситуации добавляются состояния **staged**, **modified**. Вернуть файл в состояние **untracked** можно только с помощью специальной команды. 
