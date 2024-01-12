@@ -86,10 +86,10 @@ $ git commit -m "... #334..."
 
 ```mermaid
 graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;
+      A[untracked] -- add --> B[staged];
+      B[staged] -- commit --> C[tracked];
+      C[tracked] -- changes --> D[tracked + modified];
+      D[tracked + modified] -- add --> B[staged];
 ```
 
 4.3 Описание состояний:
